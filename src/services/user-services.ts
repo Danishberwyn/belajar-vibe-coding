@@ -84,20 +84,4 @@ export const userService = {
 
     return { data: result };
   },
-
-  async logout(token: string) {
-    const [session] = await db
-      .select()
-      .from(sessions)
-      .where(eq(sessions.token, token))
-      .limit(1);
-
-    if (!session) {
-      return { error: "Unauthorized" };
-    }
-
-    await db.delete(sessions).where(eq(sessions.token, token));
-
-    return { data: "OK" };
-  },
 };
