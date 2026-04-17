@@ -1,6 +1,5 @@
 import { Elysia } from "elysia";
-import { db } from "./db";
-import { users } from "./db/schema";
+import { userRoute } from "./routes/user-route";
 
 const app = new Elysia()
   .get("/", () => ({
@@ -8,14 +7,7 @@ const app = new Elysia()
     message: "Server is running perfectly!",
     timestamp: new Date().toISOString(),
   }))
-  .get("/users", async () => {
-    try {
-      const allUsers = await db.select().from(users);
-      return allUsers;
-    } catch (error) {
-      return { error: "Failed to fetch users. Is MySQL running?" };
-    }
-  })
+  .use(userRoute)
   .listen(process.env.PORT || 3000);
 
 console.log(
