@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch src/index.ts",
-    "db:push": "bunx drizzle-kit push"
+    "db:push": "bunx drizzle-kit push",
+    "test": "bun test"
   },
   "private": true,
   "devDependencies": {
