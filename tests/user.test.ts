@@ -25,7 +25,7 @@ describe("User API", () => {
       );
 
       expect(response.status).toBe(201);
-      const body = await response.json();
+      const body = await response.json() as any;
       expect(body.data).toBe("OK");
     });
 
@@ -57,7 +57,7 @@ describe("User API", () => {
       );
 
       expect(response.status).toBe(400);
-      const body = await response.json();
+      const body = await response.json() as any;
       expect(body.error).toBe("Email sudah terdaftar");
     });
 
@@ -123,7 +123,7 @@ describe("User API", () => {
       );
 
       expect(response.status).toBe(200);
-      const body = await response.json();
+      const body = await response.json() as any;
       expect(body.data).toBeDefined();
       expect(typeof body.data).toBe("string");
     });
@@ -141,7 +141,7 @@ describe("User API", () => {
       );
 
       expect(response.status).toBe(401);
-      const body = await response.json();
+      const body = await response.json() as any;
       expect(body.error).toBe("Email atau password salah");
     });
 
@@ -199,7 +199,7 @@ describe("User API", () => {
           body: JSON.stringify({ email, password: "password123" }),
         })
       );
-      const { data: token } = await loginRes.json();
+      const { data: token } = await loginRes.json() as any;
 
       // Get Current User
       const response = await app.handle(
@@ -210,7 +210,7 @@ describe("User API", () => {
       );
 
       expect(response.status).toBe(200);
-      const body = await response.json();
+      const body = await response.json() as any;
       expect(body.data.email).toBe(email);
       expect(body.data.password).toBeUndefined(); // Password tidak boleh keluar
     });
@@ -223,7 +223,7 @@ describe("User API", () => {
       );
 
       expect(response.status).toBe(401);
-      const body = await response.json();
+      const body = await response.json() as any;
       expect(body.error).toBe("Unauthorized");
     });
 
@@ -257,7 +257,7 @@ describe("User API", () => {
           body: JSON.stringify({ email, password: "password123" }),
         })
       );
-      const { data: token } = await loginRes.json();
+      const { data: token } = await loginRes.json() as any;
 
       // Logout
       const logoutRes = await app.handle(
