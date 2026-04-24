@@ -1,14 +1,22 @@
 import { Elysia } from "elysia";
+import { swagger } from "@elysiajs/swagger";
 import { userRoute } from "./routes/user-route";
 
 export const app = new Elysia()
+  .use(swagger({
+    documentation: {
+      info: {
+        title: 'Belajar Vibe Coding API',
+        version: '1.0.0',
+        description: 'API Documentation untuk project Belajar Vibe Coding'
+      }
+    }
+  }))
   .onError(({ code, error, set }) => {
     if (code === "VALIDATION") {
       set.status = 400;
       return {
         type: "validation",
-        on: error.on,
-        summary: error.summary,
         message: error.message,
         errors: error.all
       };
